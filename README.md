@@ -1,2 +1,2 @@
 # ECS_Project
-This is account for the ECS project 
+AI-Based Urban Micro-Litter Detection & Intelligent Waste Collection Platform
