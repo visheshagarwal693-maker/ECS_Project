@@ -1,0 +1,4933 @@
+/* =========================================================
+   GLOBAL RESET
+========================================================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f5f7fb;
+  color: #172033;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+
+/* =========================================================
+   APP LAYOUT
+========================================================= */
+
+.app {
+  display: flex;
+  min-height: 100vh;
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar {
+  width: 250px;
+  min-height: 100vh;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+
+  background: #111827;
+  color: white;
+
+  padding: 25px 15px;
+
+  z-index: 1000;
+
+  transition: width 0.25s ease;
+}
+
+
+/* =========================================================
+   SIDEBAR LOGO
+========================================================= */
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 10px;
+  margin-bottom: 30px;
+
+  min-height: 50px;
+}
+
+.logo-icon {
+  width: 30px;
+  min-width: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 28px;
+}
+
+.logo-text {
+  min-width: 0;
+  white-space: nowrap;
+}
+
+.logo h2 {
+  font-size: 16px;
+  margin: 0;
+}
+
+.logo span {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #9ca3af;
+
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   SIDEBAR NAVIGATION
+========================================================= */
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+.sidebar nav a {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  min-height: 44px;
+
+  padding: 12px 14px;
+
+  border-radius: 8px;
+
+  text-decoration: none;
+
+  color: #d1d5db;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.sidebar nav a:hover {
+  background: #1f2937;
+  color: white;
+}
+
+.sidebar nav a.active {
+  background: #374151;
+  color: white;
+}
+
+
+/* =========================================================
+   SIDEBAR NAV ICONS
+========================================================= */
+
+.nav-icon {
+  width: 24px;
+  min-width: 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 16px;
+}
+
+.nav-text {
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   COLLAPSED SIDEBAR
+========================================================= */
+
+.sidebar-collapsed {
+  width: 78px;
+}
+
+.sidebar-collapsed .logo {
+  justify-content: center;
+
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.sidebar-collapsed .logo-icon {
+  margin: 0;
+}
+
+.sidebar-collapsed nav a {
+  justify-content: center;
+
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+
+/* =========================================================
+   SIDEBAR TOGGLE BUTTON
+========================================================= */
+
+.sidebar-toggle {
+  position: absolute;
+
+  top: 78px;
+  right: -14px;
+
+  width: 28px;
+  height: 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: 1px solid #d1d5db;
+  border-radius: 50%;
+
+  background: #ffffff;
+  color: #334155;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 3px 10px rgba(15, 23, 42, 0.15);
+
+  z-index: 1100;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.sidebar-toggle:hover {
+  background: #f1f5f9;
+
+  color: #172033;
+
+  transform: scale(1.05);
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+========================================================= */
+
+.main-content {
+  width: calc(100% - 250px);
+
+  margin-left: 250px;
+
+  min-height: 100vh;
+
+  padding: 30px;
+
+  transition:
+    width 0.25s ease,
+    margin-left 0.25s ease;
+}
+
+
+/* Move main content when sidebar collapses */
+
+.sidebar-collapsed + .main-content {
+  width: calc(100% - 78px);
+
+  margin-left: 78px;
+}
+
+
+/* =========================================================
+   PAGE TITLE
+========================================================= */
+
+.page-container {
+  width: 100%;
+  max-width: 1600px;
+
+  margin: 0 auto;
+}
+
+.page-title {
+  margin-bottom: 28px;
+}
+
+.page-title h1 {
+  margin: 0;
+
+  font-size: 36px;
+
+  line-height: 1.2;
+
+  color: #172033;
+}
+
+.page-title p {
+  margin-top: 8px;
+
+  color: #64748b;
+
+  font-size: 15px;
+}
+
+
+/* =========================================================
+   COMMON UI CARDS
+========================================================= */
+
+.ui-card {
+  background: #ffffff;
+
+  border-radius: 14px;
+
+  padding: 24px;
+
+  box-shadow:
+    0 4px 14px rgba(15, 23, 42, 0.06);
+}
+
+.ui-card h2 {
+  margin: 0;
+
+  color: #172033;
+
+  font-size: 20px;
+}
+
+.ui-card-subtitle {
+  margin-top: 6px;
+
+  color: #64748b;
+
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   GENERAL CARDS
+========================================================= */
+
+.card {
+  background: #ffffff;
+
+  border-radius: 12px;
+
+  padding: 22px;
+
+  margin-top: 20px;
+
+  box-shadow:
+    0 3px 10px rgba(15, 23, 42, 0.05);
+}
+
+.card h2 {
+  margin-bottom: 18px;
+}
+
+
+/* =========================================================
+   OVERVIEW / STATISTICS
+========================================================= */
+
+.stats-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 20px;
+}
+
+.stat-card {
+  background: #ffffff;
+
+  border-radius: 12px;
+
+  padding: 22px;
+
+  box-shadow:
+    0 3px 10px rgba(15, 23, 42, 0.05);
+}
+
+.stat-card h3 {
+  margin-bottom: 10px;
+
+  color: #64748b;
+
+  font-size: 14px;
+}
+
+.stat-number {
+  font-size: 30px;
+
+  font-weight: 700;
+
+  color: #172033;
+}
+
+
+/* =========================================================
+   ANALYTICS
+========================================================= */
+
+.analytics-summary {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 20px;
+
+  margin-bottom: 24px;
+}
+
+.analytics-label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #64748b;
+
+  font-size: 13px;
+}
+
+.analytics-number {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #172033;
+
+  font-size: 30px;
+
+  font-weight: 700;
+}
+
+.analytics-note {
+  color: #94a3b8;
+
+  font-size: 12px;
+}
+
+.analytics-section {
+  margin-bottom: 24px;
+}
+
+.analytics-section-header {
+  margin-bottom: 20px;
+}
+
+.analytics-section-header h2 {
+  font-size: 20px;
+}
+
+.analytics-section-header p {
+  margin-top: 6px;
+
+  color: #64748b;
+
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   ANALYTICS BAR CHART
+========================================================= */
+
+.bar-chart {
+  width: 100%;
+
+  height: 300px;
+
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: space-around;
+
+  gap: 12px;
+
+  padding: 20px 10px;
+
+  overflow-x: auto;
+
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.bar-item {
+  height: 100%;
+
+  min-width: 50px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: flex-end;
+
+  align-items: center;
+
+  gap: 7px;
+
+  flex-shrink: 0;
+}
+
+.bar {
+  width: 42px;
+
+  min-height: 10px;
+
+  background: #2563eb !important;
+
+  border-radius: 6px 6px 0 0;
+
+  opacity: 1 !important;
+
+  visibility: visible !important;
+}
+
+.bar:hover {
+  background: #1d4ed8 !important;
+}
+
+.bar-value {
+  color: #334155;
+
+  font-size: 12px;
+
+  font-weight: 600;
+}
+
+.bar-label {
+  color: #64748b;
+
+  font-size: 12px;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   ANALYTICS GRID
+========================================================= */
+
+.analytics-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 24px;
+
+  margin-bottom: 24px;
+}
+
+.distribution-list {
+  margin-top: 22px;
+}
+
+.distribution-item {
+  margin-bottom: 18px;
+}
+
+.distribution-header {
+  display: flex;
+
+  justify-content: space-between;
+
+  margin-bottom: 7px;
+
+  color: #334155;
+
+  font-size: 13px;
+}
+
+.distribution-header strong {
+  color: #172033;
+}
+
+.progress-track {
+  width: 100%;
+
+  height: 8px;
+
+  overflow: hidden;
+
+  background: #e2e8f0;
+
+  border-radius: 10px;
+}
+
+.progress-fill {
+  height: 100%;
+
+  border-radius: 10px;
+}
+
+.progress-fill.blue {
+  background: #2563eb;
+}
+
+.progress-fill.green {
+  background: #16a34a;
+}
+
+
+/* =========================================================
+   PRIORITY CARDS
+========================================================= */
+
+.priority-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 20px;
+
+  margin-top: 22px;
+}
+
+.priority-card {
+  padding: 24px;
+
+  border-radius: 14px;
+
+  text-align: center;
+}
+
+.priority-card span {
+  display: block;
+
+  margin-bottom: 10px;
+
+  font-size: 14px;
+
+  font-weight: 600;
+}
+
+.priority-card strong {
+  display: block;
+
+  margin-bottom: 4px;
+
+  font-size: 32px;
+}
+
+.priority-card small {
+  color: #64748b;
+}
+
+.priority-high {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.priority-medium {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.priority-low {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+
+/* =========================================================
+   AI DETECTION
+========================================================= */
+
+.ai-detection-page {
+  padding: 0;
+
+  color: #172033;
+}
+
+.page-header {
+  margin-bottom: 28px;
+}
+
+.page-header h1 {
+  margin: 0;
+
+  font-size: 36px;
+
+  font-weight: 700;
+
+  color: #172033;
+}
+
+.page-header p {
+  margin-top: 8px;
+
+  color: #64748b;
+
+  font-size: 15px;
+}
+
+
+/* =========================================================
+   AI KPI CARDS
+========================================================= */
+
+.detection-kpis {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 20px;
+
+  margin-bottom: 24px;
+}
+
+.detection-card {
+  background: #ffffff;
+
+  border-radius: 14px;
+
+  padding: 24px;
+
+  box-shadow:
+    0 4px 14px rgba(15, 23, 42, 0.06);
+}
+
+.card-label {
+  display: block;
+
+  margin-bottom: 9px;
+
+  color: #64748b;
+
+  font-size: 13px;
+}
+
+.detection-card strong {
+  color: #172033;
+
+  font-size: 25px;
+}
+
+
+/* =========================================================
+   AI MAIN GRID
+========================================================= */
+
+.detection-main-grid {
+  display: grid;
+
+  grid-template-columns: 1.5fr 1fr;
+
+  gap: 24px;
+
+  margin-bottom: 24px;
+}
+
+.panel {
+  background: #ffffff;
+
+  border-radius: 14px;
+
+  padding: 24px;
+
+  box-shadow:
+    0 4px 14px rgba(15, 23, 42, 0.06);
+}
+
+.panel-header {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: flex-start;
+
+  gap: 15px;
+
+  margin-bottom: 20px;
+}
+
+.panel-header h2 {
+  margin: 0;
+
+  font-size: 20px;
+
+  color: #172033;
+}
+
+.panel-header p {
+  margin-top: 6px;
+
+  color: #64748b;
+
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   AI STATUS
+========================================================= */
+
+.status-badge {
+  padding: 7px 13px;
+
+  border-radius: 20px;
+
+  background: #dcfce7;
+
+  color: #15803d;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+.status-badge.small {
+  padding: 5px 10px;
+
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   CAMERA / AI VISUAL
+========================================================= */
+
+.detection-visual {
+  width: 100%;
+}
+
+.fake-camera {
+  position: relative;
+
+  width: 100%;
+
+  height: 330px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  overflow: hidden;
+
+  border-radius: 12px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #334155,
+      #475569,
+      #1e293b
+    );
+}
+
+.camera-label {
+  position: absolute;
+
+  top: 15px;
+  left: 15px;
+
+  padding: 7px 12px;
+
+  border-radius: 7px;
+
+  background: rgba(0, 0, 0, 0.55);
+
+  color: white;
+
+  font-size: 12px;
+}
+
+.bounding-box {
+  position: relative;
+
+  width: 150px;
+
+  height: 190px;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: flex-start;
+
+  border: 3px solid #22c55e;
+}
+
+.bounding-box span {
+  position: absolute;
+
+  top: -30px;
+  left: -3px;
+
+  padding: 6px 9px;
+
+  border-radius: 5px 5px 0 0;
+
+  background: #22c55e;
+
+  color: white;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   AI COORDINATES
+========================================================= */
+
+.bounding-info {
+  margin-top: 20px;
+}
+
+.bounding-info h3 {
+  margin-bottom: 14px;
+
+  font-size: 16px;
+}
+
+.coordinates {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 10px;
+}
+
+.coordinates div {
+  padding: 12px;
+
+  border-radius: 9px;
+
+  background: #f8fafc;
+}
+
+.coordinates span {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: #64748b;
+
+  font-size: 12px;
+}
+
+.coordinates strong {
+  font-size: 15px;
+}
+
+
+/* =========================================================
+   JSON OUTPUT
+========================================================= */
+
+.json-output {
+  min-height: 280px;
+
+  padding: 20px;
+
+  overflow-x: auto;
+
+  border-radius: 10px;
+
+  background: #0f172a;
+
+  color: #86efac;
+
+  font-size: 13px;
+
+  line-height: 1.7;
+}
+
+
+/* =========================================================
+   TABLES
+========================================================= */
+
+.table-container {
+  width: 100%;
+
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+
+  border-collapse: collapse;
+}
+
+thead {
+  background: #f8fafc;
+}
+
+th {
+  padding: 14px;
+
+  text-align: left;
+
+  color: #64748b;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+td {
+  padding: 15px 14px;
+
+  border-top: 1px solid #e2e8f0;
+
+  color: #334155;
+
+  font-size: 14px;
+}
+
+tbody tr:hover {
+  background: #f8fafc;
+}
+
+.confidence {
+  color: #2563eb;
+
+  font-weight: 600;
+}
+
+.history-panel {
+  margin-bottom: 30px;
+}
+
+
+/* =========================================================
+   GENERAL STATUS
+========================================================= */
+
+.status {
+  display: inline-block;
+
+  padding: 5px 10px;
+
+  border-radius: 20px;
+
+  font-size: 12px;
+
+  font-weight: 600;
+}
+
+.status-pill {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 6px 12px;
+
+  border-radius: 999px;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+.high {
+  background: #fee2e2;
+
+  color: #b91c1c;
+}
+
+.medium {
+  background: #ffedd5;
+
+  color: #c2410c;
+}
+
+.low {
+  background: #dcfce7;
+
+  color: #15803d;
+}
+
+.status-high {
+  background: #fee2e2;
+
+  color: #b91c1c;
+}
+
+.status-medium {
+  background: #fef3c7;
+
+  color: #b45309;
+}
+
+.status-low {
+  background: #dcfce7;
+
+  color: #15803d;
+}
+
+.status-pending {
+  background: #e2e8f0;
+
+  color: #475569;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.primary-button {
+  padding: 10px 18px;
+
+  border: none;
+
+  border-radius: 8px;
+
+  background: #2563eb;
+
+  color: white;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.primary-button:hover {
+  background: #1d4ed8;
+}
+
+.secondary-button {
+  padding: 10px 18px;
+
+  border: 1px solid #cbd5e1;
+
+  border-radius: 8px;
+
+  background: white;
+
+  color: #334155;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.secondary-button:hover {
+  background: #f8fafc;
+}
+
+
+/* =========================================================
+   HOTSPOTS & MAP
+========================================================= */
+
+.hotspot-summary {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 20px;
+
+  margin-bottom: 24px;
+}
+
+.hotspot-stat-card {
+  min-height: 145px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+}
+
+
+/* =========================================================
+   HOTSPOT MAP + LIST
+========================================================= */
+
+.hotspot-layout {
+  display: grid;
+
+  grid-template-columns: 1.45fr 1fr;
+
+  gap: 24px;
+
+  margin-bottom: 24px;
+}
+
+.map-card {
+  min-width: 0;
+}
+
+.map-header {
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-bottom: 18px;
+}
+
+.map-header h2 {
+  margin: 0;
+}
+
+.map-status {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 5px;
+
+  padding: 7px 12px;
+
+  border-radius: 999px;
+
+  background: #dcfce7;
+
+  color: #15803d;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+.hotspot-map-wrapper {
+  width: 100%;
+
+  height: 430px;
+
+  overflow: hidden;
+
+  border-radius: 12px;
+}
+
+.hotspot-map-wrapper > div {
+  width: 100% !important;
+
+  height: 100% !important;
+
+  border-radius: 12px;
+}
+
+
+/* =========================================================
+   HOTSPOT LIST
+========================================================= */
+
+.hotspot-list-card {
+  min-width: 0;
+}
+
+.hotspot-list-header {
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: space-between;
+
+  gap: 15px;
+
+  margin-bottom: 20px;
+}
+
+.location-count,
+.table-count {
+  padding: 6px 10px;
+
+  border-radius: 999px;
+
+  background: #f1f5f9;
+
+  color: #64748b;
+
+  font-size: 11px;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+.hotspot-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 12px;
+}
+
+.hotspot-item {
+  padding: 16px;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 12px;
+
+  background: #ffffff;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.hotspot-item:hover {
+  transform: translateY(-1px);
+
+  border-color: #cbd5e1;
+
+  box-shadow:
+    0 4px 12px rgba(15, 23, 42, 0.06);
+}
+
+.hotspot-top {
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: space-between;
+
+  gap: 12px;
+}
+
+.hotspot-location-info {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  min-width: 0;
+}
+
+.location-icon {
+  width: 36px;
+  height: 36px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background: #eff6ff;
+
+  font-size: 17px;
+}
+
+.hotspot-location-info h3 {
+  margin: 0;
+
+  color: #172033;
+
+  font-size: 14px;
+
+  font-weight: 700;
+}
+
+.hotspot-time {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #94a3b8;
+
+  font-size: 11px;
+}
+
+.hotspot-details {
+  display: grid;
+
+  grid-template-columns:
+    1.2fr 1fr 1fr;
+
+  gap: 10px;
+
+  margin-top: 15px;
+
+  padding-top: 14px;
+
+  border-top: 1px solid #f1f5f9;
+}
+
+.hotspot-details > div {
+  min-width: 0;
+}
+
+.hotspot-details span {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: #94a3b8;
+
+  font-size: 10px;
+}
+
+.hotspot-details strong {
+  color: #334155;
+
+  font-size: 12px;
+}
+
+.hotspot-detail-main strong {
+  color: #172033;
+
+  font-size: 18px;
+}
+
+
+/* =========================================================
+   HOTSPOT TABLE
+========================================================= */
+
+.hotspot-table-card {
+  margin-bottom: 30px;
+}
+
+.table-header {
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-bottom: 20px;
+}
+
+.table-location {
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+}
+
+.table-location-icon {
+  width: 28px;
+  height: 28px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 8px;
+
+  background: #f8fafc;
+
+  font-size: 13px;
+}
+
+.detection-value {
+  color: #172033;
+
+  font-size: 14px;
+}
+
+.coordinate-text {
+  color: #64748b;
+
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   HOTSPOT / MAP STATUS
+========================================================= */
+
+.status-message {
+  min-height: 180px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+
+  color: #64748b;
+}
+
+.status-message h3 {
+  margin: 10px 0 5px;
+
+  color: #334155;
+}
+
+.status-message p {
+  font-size: 14px;
+}
+
+.status-icon {
+  font-size: 32px;
+}
+
+.error-message {
+  background: #fff7f7;
+
+  border-radius: 12px;
+}
+
+.empty-message {
+  background: #f8fafc;
+
+  border-radius: 12px;
+}
+
+
+/* =========================================================
+   RESPONSIVE — 1200px
+========================================================= */
+
+@media (max-width: 1200px) {
+
+  .main-content {
+    padding: 24px;
+  }
+
+  .detection-main-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — 1000px
+========================================================= */
+
+@media (max-width: 1000px) {
+
+  .stats-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .detection-kpis {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .analytics-summary {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .analytics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hotspot-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .hotspot-map-wrapper {
+    height: 420px;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — 900px
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .sidebar {
+    width: 210px;
+  }
+
+  .main-content {
+    width: calc(100% - 210px);
+
+    margin-left: 210px;
+
+    padding: 20px;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — 800px
+========================================================= */
+
+@media (max-width: 800px) {
+
+  .hotspot-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .hotspot-details {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+  }
+
+  .priority-grid {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — 700px
+========================================================= */
+
+@media (max-width: 700px) {
+
+  .page-title h1 {
+    font-size: 30px;
+  }
+
+  .hotspot-list-header,
+  .map-header,
+  .table-header {
+    flex-direction: column;
+  }
+
+  .hotspot-map-wrapper {
+    height: 350px;
+  }
+
+  .priority-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — 600px
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .main-content {
+    padding: 15px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .detection-kpis {
+    grid-template-columns: 1fr;
+  }
+
+  .analytics-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .coordinates {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .hotspot-details {
+    grid-template-columns:
+      1fr 1fr;
+  }
+
+  .hotspot-detail-main {
+    grid-column: 1 / -1;
+  }
+
+  .bar {
+    width: 30px;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — 450px
+========================================================= */
+
+@media (max-width: 450px) {
+
+  .sidebar {
+    width: 180px;
+  }
+
+  .main-content {
+    width: calc(100% - 180px);
+
+    margin-left: 180px;
+
+    padding: 12px;
+  }
+
+  .page-title h1 {
+    font-size: 25px;
+  }
+
+  .ui-card {
+    padding: 16px;
+  }
+
+  .hotspot-map-wrapper {
+    height: 300px;
+  }
+
+}
+
+
+/* =========================================================
+   COLLAPSED SIDEBAR — RESPONSIVE OVERRIDE
+========================================================= */
+
+/*
+   This section must remain at the very bottom.
+
+   It makes sure the collapsed width wins over
+   the responsive sidebar widths above.
+*/
+
+.sidebar.sidebar-collapsed {
+  width: 78px;
+}
+
+.sidebar.sidebar-collapsed + .main-content {
+  width: calc(100% - 78px);
+
+  margin-left: 78px;
+}
+/* =========================================================
+   OVERVIEW CAMERA + PIE CHART LAYOUT
+   ========================================================= */
+
+.overview-camera-layout {
+  display: grid;
+  grid-template-columns: minmax(420px, 0.9fr) minmax(520px, 1.3fr);
+  gap: 24px;
+  align-items: start;
+}
+
+
+/* =========================================================
+   CAMERA LIST - VERTICAL
+   ========================================================= */
+
+.camera-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+
+/* =========================================================
+   CAMERA CARD
+   ========================================================= */
+
+.camera-item {
+  position: relative;
+  width: 100%;
+  min-height: 92px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+
+  padding: 14px 16px;
+
+  border-radius: 14px;
+
+  cursor: pointer;
+
+  text-align: left;
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+
+/* Keep the cards neatly below each other */
+
+.camera-item + .camera-item {
+  margin-top: 0;
+}
+
+
+.camera-item:hover {
+  transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   CAMERA NUMBER
+   ========================================================= */
+
+.camera-number {
+  width: 48px;
+  height: 48px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 3px;
+
+  border-radius: 12px;
+
+  border: 1px solid;
+}
+
+
+.camera-number span {
+  font-size: 17px;
+}
+
+
+.camera-number strong {
+  font-size: 17px;
+}
+
+
+/* =========================================================
+   CAMERA INFORMATION
+   ========================================================= */
+
+.camera-info {
+  min-width: 0;
+
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+
+.camera-name {
+  font-size: 15px;
+  font-weight: 800;
+}
+
+
+.camera-location {
+  font-size: 11px;
+  color: #64748b;
+}
+
+
+.camera-meta {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  margin-top: 3px;
+}
+
+
+.priority-badge {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 5px;
+
+  padding: 4px 7px;
+
+  border-radius: 999px;
+
+  font-size: 10px;
+  font-weight: 700;
+}
+
+
+.priority-indicator {
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+}
+
+
+.camera-status {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 5px;
+
+  font-size: 10px;
+  font-weight: 600;
+
+  color: #475569;
+}
+
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background: #22c55e;
+}
+
+
+/* =========================================================
+   DETECTION COUNT
+   ========================================================= */
+
+.camera-detections {
+  flex-shrink: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: flex-end;
+
+  min-width: 70px;
+}
+
+
+.camera-detections strong {
+  font-size: 22px;
+  font-weight: 800;
+
+  color: #0f172a;
+}
+
+
+.camera-detections span {
+  font-size: 9px;
+
+  color: #64748b;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.4px;
+}
+
+
+/* =========================================================
+   SELECTED CAMERA INDICATOR
+   ========================================================= */
+
+.camera-selected-indicator {
+  position: absolute;
+
+  top: 8px;
+  right: 10px;
+
+  padding: 3px 7px;
+
+  border-radius: 999px;
+
+  background: #ffffff;
+
+  font-size: 9px;
+  font-weight: 800;
+
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.08);
+}
+
+
+/* =========================================================
+   PIE CHART CARD
+   ========================================================= */
+
+.camera-pie-card {
+  min-height: 100%;
+
+  overflow: hidden;
+}
+
+
+.pie-card-header {
+  display: flex;
+
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 16px;
+}
+
+
+.pie-total {
+  flex-shrink: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: flex-end;
+}
+
+
+.pie-total strong {
+  font-size: 25px;
+  font-weight: 800;
+
+  color: #0f172a;
+}
+
+
+.pie-total span {
+  font-size: 10px;
+
+  color: #64748b;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.5px;
+}
+
+
+.camera-pie-chart {
+  width: 100%;
+  min-height: 350px;
+}
+
+
+/* =========================================================
+   PRIORITY LEGEND
+   ========================================================= */
+
+.priority-legend {
+  display: flex;
+
+  justify-content: center;
+
+  gap: 20px;
+
+  padding-top: 6px;
+}
+
+
+.priority-legend-item {
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  font-size: 10px;
+
+  color: #64748b;
+}
+
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+}
+
+
+.legend-high {
+  background: #dc2626;
+}
+
+
+.legend-medium {
+  background: #f59e0b;
+}
+
+
+.legend-low {
+  background: #16a34a;
+}
+
+
+/* =========================================================
+   LOWER SELECTED CAMERA AREA
+   ========================================================= */
+
+.selected-camera-card {
+  margin-top: 22px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 24px;
+
+  padding: 20px 24px;
+
+  border-radius: 16px;
+}
+
+
+.selected-camera-left {
+  display: flex;
+
+  align-items: center;
+
+  gap: 16px;
+
+  min-width: 0;
+}
+
+
+.selected-camera-icon {
+  width: 48px;
+  height: 48px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+
+  background: #f1f5f9;
+
+  font-size: 21px;
+}
+
+
+.selected-camera-left > div:last-child {
+  min-width: 0;
+}
+
+
+.selected-camera-left .analytics-label {
+  display: block;
+
+  margin-bottom: 3px;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  color: #64748b;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.6px;
+}
+
+
+.selected-camera-left h2 {
+  margin: 0;
+
+  font-size: 19px;
+  line-height: 1.2;
+
+  color: #0f172a;
+}
+
+
+.selected-camera-left p {
+  margin: 4px 0 0;
+
+  font-size: 12px;
+
+  color: #64748b;
+}
+
+
+.selected-camera-badge {
+  flex-shrink: 0;
+
+  padding: 8px 12px;
+
+  border-radius: 999px;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+
+.selected-priority-high {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+
+.selected-priority-medium {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+
+.selected-priority-low {
+  background: #dcfce7;
+  color: #166534;
+}
+
+
+/* =========================================================
+   LOWER SUMMARY CARDS
+   ========================================================= */
+
+.overview-summary {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 16px;
+
+  margin-top: 18px;
+}
+
+
+.overview-stat-card {
+  min-height: 120px;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+
+  padding: 18px 20px;
+
+  border-radius: 14px;
+}
+
+
+.overview-stat-card .analytics-label {
+  font-size: 10px;
+  font-weight: 700;
+
+  color: #64748b;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.5px;
+}
+
+
+.overview-stat-card .analytics-number {
+  margin-top: 7px;
+
+  font-size: 25px;
+  line-height: 1.1;
+
+  font-weight: 800;
+
+  color: #0f172a;
+}
+
+
+.overview-stat-card .analytics-note {
+  margin-top: 6px;
+
+  font-size: 11px;
+
+  color: #94a3b8;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+  .overview-camera-layout {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+@media (max-width: 900px) {
+
+  .overview-summary {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .camera-item {
+    min-height: 86px;
+
+    padding: 12px;
+  }
+
+
+  .camera-number {
+    width: 42px;
+    height: 42px;
+  }
+
+
+  .camera-detections {
+    min-width: 55px;
+  }
+
+
+  .camera-detections strong {
+    font-size: 19px;
+  }
+
+
+  .camera-meta {
+    gap: 6px;
+  }
+
+
+  .selected-camera-card {
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+
+  .selected-camera-badge {
+    align-self: flex-start;
+  }
+
+
+  .overview-summary {
+    grid-template-columns: 1fr;
+  }
+
+
+  .priority-legend {
+    flex-wrap: wrap;
+
+    gap: 10px 16px;
+  }
+
+}
+/* =========================================================
+   CAMERA COLOURS ACCORDING TO PRIORITY
+   ========================================================= */
+
+/* CAMERA A - HIGH PRIORITY - RED */
+
+.camera-priority-high {
+  background: #fff1f2 !important;
+  border: 2px solid #ef4444 !important;
+  border-left: 8px solid #dc2626 !important;
+}
+
+.camera-priority-high .camera-number {
+  background: #fee2e2 !important;
+  border-color: #fca5a5 !important;
+  color: #b91c1c !important;
+}
+
+.camera-priority-high .camera-name {
+  color: #991b1b !important;
+}
+
+.camera-priority-high .priority-badge {
+  background: #fee2e2 !important;
+  color: #991b1b !important;
+}
+
+.camera-priority-high .priority-indicator {
+  background: #dc2626 !important;
+}
+
+
+/* CAMERA B & C - MEDIUM PRIORITY - ORANGE */
+
+.camera-priority-medium {
+  background: #fff7ed !important;
+  border: 2px solid #f59e0b !important;
+  border-left: 8px solid #f59e0b !important;
+}
+
+.camera-priority-medium .camera-number {
+  background: #fef3c7 !important;
+  border-color: #fcd34d !important;
+  color: #b45309 !important;
+}
+
+.camera-priority-medium .camera-name {
+  color: #92400e !important;
+}
+
+.camera-priority-medium .priority-badge {
+  background: #fef3c7 !important;
+  color: #92400e !important;
+}
+
+.camera-priority-medium .priority-indicator {
+  background: #f59e0b !important;
+}
+
+
+/* CAMERA D - LOW PRIORITY - GREEN */
+
+.camera-priority-low {
+  background: #f0fdf4 !important;
+  border: 2px solid #22c55e !important;
+  border-left: 8px solid #16a34a !important;
+}
+
+.camera-priority-low .camera-number {
+  background: #dcfce7 !important;
+  border-color: #86efac !important;
+  color: #15803d !important;
+}
+
+.camera-priority-low .camera-name {
+  color: #166534 !important;
+}
+
+.camera-priority-low .priority-badge {
+  background: #dcfce7 !important;
+  color: #166534 !important;
+}
+
+.camera-priority-low .priority-indicator {
+  background: #16a34a !important;
+}
+
+
+/* =========================================================
+   HOVER
+   ========================================================= */
+
+.camera-priority-high:hover {
+  background: #ffe4e6 !important;
+  box-shadow: 0 8px 20px rgba(220, 38, 38, 0.15);
+}
+
+.camera-priority-medium:hover {
+  background: #ffedd5 !important;
+  box-shadow: 0 8px 20px rgba(245, 158, 11, 0.15);
+}
+
+.camera-priority-low:hover {
+  background: #dcfce7 !important;
+  box-shadow: 0 8px 20px rgba(22, 163, 74, 0.15);
+}
+
+
+/* =========================================================
+   SELECTED CAMERA
+   ========================================================= */
+
+.camera-priority-high.camera-item-selected {
+  background: #fee2e2 !important;
+  border-color: #dc2626 !important;
+}
+
+.camera-priority-medium.camera-item-selected {
+  background: #fef3c7 !important;
+  border-color: #f59e0b !important;
+}
+
+.camera-priority-low.camera-item-selected {
+  background: #dcfce7 !important;
+  border-color: #16a34a !important;
+}
+/* =========================================================
+   URBAN LITTER AI
+   COMMAND CENTER OVERVIEW
+   ========================================================= */
+
+.command-center {
+  width: 100%;
+  padding: 28px;
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.command-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.command-header h1 {
+  margin: 0;
+  color: #172554;
+  font-size: 29px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+}
+
+.command-header p {
+  margin: 5px 0 0;
+  color: #64748b;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.command-live {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #15803d;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.live-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #16a34a;
+}
+
+
+/* =========================================================
+   KPI CARDS
+   ========================================================= */
+
+.command-kpi-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.command-kpi {
+  min-height: 145px;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  border: 1px solid;
+  box-sizing: border-box;
+}
+
+.command-kpi > div:last-child {
+  display: flex;
+  flex-direction: column;
+}
+
+.command-kpi > div:last-child > span {
+  color: #334155;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.command-kpi strong {
+  margin-top: 5px;
+  color: #172554;
+  font-size: 30px;
+  line-height: 1.15;
+}
+
+.command-kpi small {
+  margin-top: 7px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.command-kpi em {
+  color: #94a3b8;
+  font-size: 10px;
+  font-style: normal;
+}
+
+.command-kpi-icon {
+  width: 47px;
+  height: 47px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 21px;
+  flex-shrink: 0;
+}
+
+.kpi-litter {
+  background: #f8fbff;
+  border-color: #bfdbfe;
+}
+
+.kpi-litter .command-kpi-icon {
+  background: #dbeafe;
+}
+
+.kpi-high {
+  background: #fff8f8;
+  border-color: #fecaca;
+}
+
+.kpi-high .command-kpi-icon {
+  background: #fee2e2;
+}
+
+.kpi-cameras {
+  background: #f6fffb;
+  border-color: #bbf7d0;
+}
+
+.kpi-cameras .command-kpi-icon {
+  background: #dcfce7;
+}
+
+.kpi-ai {
+  background: #fbf9ff;
+  border-color: #ddd6fe;
+}
+
+.kpi-ai .command-kpi-icon {
+  background: #ede9fe;
+}
+
+.kpi-positive {
+  color: #16a34a;
+}
+
+.kpi-negative {
+  color: #dc2626;
+}
+
+
+/* =========================================================
+   TWO COLUMN
+   ========================================================= */
+
+.command-two-column {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(0, 1fr);
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+
+/* =========================================================
+   PANELS
+   ========================================================= */
+
+.command-panel {
+  background: #ffffff;
+  border: 1px solid #dbeafe;
+  border-radius: 10px;
+  padding: 18px;
+  box-sizing: border-box;
+  box-shadow:
+    0 2px 8px rgba(15, 23, 42, 0.035);
+}
+
+.command-panel-heading {
+  margin-bottom: 15px;
+}
+
+.command-panel-heading h2 {
+  margin: 0;
+  color: #172554;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.command-panel-heading p {
+  margin: 4px 0 0;
+  color: #64748b;
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   CAMERA LIST
+   ========================================================= */
+
+.command-camera-list {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.command-camera {
+  width: 100%;
+  min-height: 62px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 12px;
+  border-radius: 9px;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  transition: 0.2s ease;
+}
+
+.command-camera:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 4px 12px rgba(15, 23, 42, 0.08);
+}
+
+.command-camera-circle {
+  width: 43px;
+  height: 43px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  font-size: 17px;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.command-camera-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.command-camera-info strong {
+  color: #172554;
+  font-size: 14px;
+}
+
+.command-camera-info span {
+  margin-top: 3px;
+  color: #64748b;
+  font-size: 12px;
+}
+
+
+/* CAMERA A */
+
+.command-camera.camera-priority-high {
+  background: #fff1f2;
+  border: 1px solid #fecaca;
+  border-left: 5px solid #dc2626;
+}
+
+.command-camera.camera-priority-high
+.command-camera-circle {
+  background: #ef4444;
+}
+
+
+/* CAMERA B / C */
+
+.command-camera.camera-priority-medium {
+  background: #fffaf0;
+  border: 1px solid #fed7aa;
+  border-left: 5px solid #f59e0b;
+}
+
+.command-camera.camera-priority-medium
+.command-camera-circle {
+  background: #f59e0b;
+}
+
+
+/* CAMERA D */
+
+.command-camera.camera-priority-low {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-left: 5px solid #16a34a;
+}
+
+.command-camera.camera-priority-low
+.command-camera-circle {
+  background: #16a34a;
+}
+
+
+/* =========================================================
+   PRIORITY BADGE
+   ========================================================= */
+
+.command-priority {
+  padding: 5px 9px;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.camera-priority-high .command-priority {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.camera-priority-medium .command-priority {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.camera-priority-low .command-priority {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+
+/* =========================================================
+   CAMERA ONLINE
+   ========================================================= */
+
+.command-camera-online {
+  min-width: 64px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #475569;
+  font-size: 11px;
+}
+
+.command-camera-online span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #16a34a;
+}
+
+
+/* =========================================================
+   REGION DONUT
+   ========================================================= */
+
+.region-chart-layout {
+  min-height: 285px;
+  display: grid;
+  grid-template-columns:
+    minmax(230px, 1fr)
+    minmax(190px, 0.8fr);
+  align-items: center;
+}
+
+.region-donut {
+  position: relative;
+  height: 270px;
+}
+
+.region-donut-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform:
+    translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+}
+
+.region-donut-center strong {
+  color: #172554;
+  font-size: 21px;
+  line-height: 1;
+}
+
+.region-donut-center span {
+  margin-top: 5px;
+  color: #64748b;
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   REGION LEGEND
+   ========================================================= */
+
+.region-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+}
+
+.region-legend-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.region-legend-row > div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #334155;
+  font-size: 11px;
+}
+
+.region-legend-row strong {
+  color: #172554;
+  font-size: 12px;
+}
+
+.region-legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+
+/* =========================================================
+   PRIORITY ALERT
+   ========================================================= */
+
+.priority-alert {
+  background: #fffafa;
+  border-color: #fecaca;
+}
+
+.priority-alert
+.command-panel-heading h2 {
+  color: #b91c1c;
+}
+
+.alert-box {
+  padding: 14px;
+  border: 1px solid #fecaca;
+  border-radius: 9px;
+  background: #ffffff;
+}
+
+.alert-summary {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #475569;
+  font-size: 12px;
+}
+
+.zone-badge {
+  padding: 7px 15px;
+  border-radius: 20px;
+  background: #ef4444;
+  color: white;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.alert-summary strong {
+  color: #dc2626;
+  font-size: 18px;
+}
+
+.alert-box p {
+  margin: 13px 0;
+  color: #475569;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.alert-button {
+  border: none;
+  border-radius: 7px;
+  background: #ef4444;
+  color: white;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.alert-button:hover {
+  background: #dc2626;
+}
+
+
+/* =========================================================
+   SYSTEM HEALTH
+   ========================================================= */
+
+.system-health {
+  background: #f8fffc;
+  border-color: #bbf7d0;
+}
+
+.system-health
+.command-panel-heading h2 {
+  color: #166534;
+}
+
+.health-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.health-row {
+  min-height: 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #dbeafe;
+}
+
+.health-row > div {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  color: #334155;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.health-status-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #16a34a;
+  box-shadow:
+    0 0 0 5px #dcfce7;
+}
+
+.health-row strong {
+  color: #15803d;
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   COLLECTION PREVIEW
+   ========================================================= */
+
+.collection-panel {
+  margin-bottom: 18px;
+}
+
+.collection-list {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.collection-row {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 10px;
+  border: 1px solid #dbeafe;
+  border-radius: 8px;
+  background: #f8fbff;
+}
+
+.collection-rank {
+  width: 20px;
+  color: #334155;
+  font-size: 13px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.collection-camera {
+  width: 31px;
+  height: 31px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.collection-camera-a {
+  background: #ef4444;
+}
+
+.collection-camera-b {
+  background: #f59e0b;
+}
+
+.collection-camera-c {
+  background: #f59e0b;
+}
+
+.collection-camera-d {
+  background: #16a34a;
+}
+
+.collection-zone {
+  flex: 1;
+  color: #334155;
+  font-size: 12px;
+}
+
+.collection-high {
+  padding: 6px 10px;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  background: #fee2e2;
+  color: #dc2626;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.full-queue-button {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid #bfdbfe;
+  border-radius: 7px;
+  background: #f0f7ff;
+  color: #1e40af;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.full-queue-button:hover {
+  background: #dbeafe;
+}
+
+.full-queue-button span {
+  margin-left: 7px;
+}
+
+
+/* =========================================================
+   SELECTED CAMERA - BOTTOM
+   ========================================================= */
+
+.selected-camera-command {
+  margin-top: 18px;
+  padding: 18px;
+  border-radius: 10px;
+  background: #ffffff;
+  border: 2px solid #2563eb;
+  box-shadow:
+    0 4px 14px rgba(37, 99, 235, 0.08);
+}
+
+
+/* CAMERA-SPECIFIC SELECTED BORDER */
+
+.selected-camera-a {
+  border-color: #ef4444;
+}
+
+.selected-camera-b {
+  border-color: #f59e0b;
+}
+
+.selected-camera-c {
+  border-color: #f59e0b;
+}
+
+.selected-camera-d {
+  border-color: #22c55e;
+}
+
+
+.selected-camera-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.selected-camera-header > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.selected-camera-header span {
+  color: #64748b;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+}
+
+.selected-camera-header h2 {
+  margin: 3px 0 0;
+  color: #172554;
+  font-size: 19px;
+}
+
+.selected-camera-header p {
+  margin: 3px 0 0;
+  color: #64748b;
+  font-size: 12px;
+}
+
+
+.close-selected-camera {
+  width: 31px;
+  height: 31px;
+  border: none;
+  border-radius: 50%;
+  background: #f1f5f9;
+  color: #64748b;
+  cursor: pointer;
+  font-size: 21px;
+  line-height: 1;
+}
+
+.close-selected-camera:hover {
+  background: #e2e8f0;
+}
+
+
+.selected-camera-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+
+
+.selected-camera-card {
+  padding: 14px;
+  border-radius: 8px;
+  border: 1px solid #dbeafe;
+  background: #f8fbff;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+
+.selected-camera-card span {
+  color: #64748b;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+
+.selected-camera-card strong {
+  color: #172554;
+  font-size: 16px;
+}
+
+
+.selected-online {
+  color: #16a34a !important;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1200px) {
+
+  .command-kpi-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .region-chart-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .region-legend {
+    padding-bottom: 12px;
+  }
+
+  .selected-camera-grid {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+  }
+
+}
+
+
+@media (max-width: 900px) {
+
+  .command-two-column {
+    grid-template-columns: 1fr;
+  }
+
+  .selected-camera-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+
+@media (max-width: 650px) {
+
+  .command-center {
+    padding: 16px;
+  }
+
+  .command-header {
+    align-items: flex-start;
+  }
+
+  .command-header h1 {
+    font-size: 22px;
+  }
+
+  .command-kpi-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .command-camera {
+    flex-wrap: wrap;
+  }
+
+  .command-camera-online {
+    margin-left: 55px;
+  }
+
+  .selected-camera-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+/* =========================================================
+   FINAL COMMAND CENTER OVERRIDES
+   ========================================================= */
+
+
+/* =========================================================
+   SELECTED CAMERA POSITION
+   ========================================================= */
+
+.selected-camera-command {
+  width: 100%;
+  margin-top: 18px;
+  margin-bottom: 18px;
+  padding: 18px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  background: #ffffff;
+  border: 2px solid #2563eb;
+  box-shadow:
+    0 4px 14px rgba(37, 99, 235, 0.08);
+}
+
+
+/* CAMERA-SPECIFIC BORDER */
+
+.selected-camera-a {
+  border-color: #ef4444;
+  background: #fffafa;
+}
+
+.selected-camera-b {
+  border-color: #f59e0b;
+  background: #fffdf8;
+}
+
+.selected-camera-c {
+  border-color: #f59e0b;
+  background: #fffdf8;
+}
+
+.selected-camera-d {
+  border-color: #22c55e;
+  background: #f8fff9;
+}
+
+
+/* =========================================================
+   SELECTED CAMERA HEADER
+   ========================================================= */
+
+.selected-camera-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+
+.selected-camera-header > div {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.selected-camera-header span {
+  color: #64748b;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.7px;
+}
+
+
+.selected-camera-header h2 {
+  margin: 3px 0 0;
+  color: #172554;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+
+.selected-camera-header p {
+  margin: 3px 0 0;
+  color: #64748b;
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   CLOSE BUTTON
+   ========================================================= */
+
+.close-selected-camera {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  background: #f1f5f9;
+  color: #64748b;
+  cursor: pointer;
+  font-size: 21px;
+  line-height: 1;
+}
+
+
+.close-selected-camera:hover {
+  background: #e2e8f0;
+  color: #334155;
+}
+
+
+/* =========================================================
+   SELECTED CAMERA CARDS
+   ========================================================= */
+
+.selected-camera-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+
+
+.selected-camera-card {
+  min-height: 72px;
+  padding: 13px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  border: 1px solid #dbeafe;
+  background: #f8fbff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+}
+
+
+.selected-camera-card span {
+  color: #64748b;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+
+.selected-camera-card strong {
+  color: #172554;
+  font-size: 16px;
+}
+
+
+.selected-online {
+  color: #16a34a !important;
+}
+
+
+/* =========================================================
+   PRIORITY ALERT
+   ========================================================= */
+
+.priority-alert {
+  background: #fffafa;
+  border-color: #fecaca;
+}
+
+
+.priority-alert
+.command-panel-heading h2 {
+  color: #b91c1c;
+}
+
+
+.alert-box {
+  padding: 14px;
+  border: 1px solid #fecaca;
+  border-radius: 9px;
+  background: #ffffff;
+}
+
+
+.alert-summary {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #475569;
+  font-size: 12px;
+}
+
+
+.zone-badge {
+  padding: 7px 15px;
+  border-radius: 20px;
+  background: #ef4444;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+
+.alert-summary strong {
+  color: #dc2626;
+  font-size: 18px;
+}
+
+
+.alert-box p {
+  margin: 13px 0;
+  color: #475569;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+
+.alert-button {
+  border: none;
+  border-radius: 7px;
+  background: #ef4444;
+  color: #ffffff;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  transition: 0.2s ease;
+}
+
+
+.alert-button:hover {
+  background: #dc2626;
+  transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   SYSTEM HEALTH
+   ========================================================= */
+
+.system-health {
+  background: #f8fffc;
+  border-color: #bbf7d0;
+}
+
+
+.system-health
+.command-panel-heading h2 {
+  color: #166534;
+}
+
+
+.health-list {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.health-row {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #dbeafe;
+}
+
+
+.health-row > div {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  color: #334155;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+
+.health-status-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #16a34a;
+  box-shadow:
+    0 0 0 5px #dcfce7;
+}
+
+
+.health-row strong {
+  color: #15803d;
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   REMOVE COLLECTION PREVIEW IF OLD JSX/CSS EXISTS
+   ========================================================= */
+
+.collection-preview-panel,
+.collection-panel,
+.collection-preview-list,
+.collection-list {
+  display: none;
+}
+
+
+/* =========================================================
+   RESPONSIVE SELECTED CAMERA
+   ========================================================= */
+
+@media (max-width: 1200px) {
+
+  .selected-camera-grid {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+  }
+
+}
+
+
+@media (max-width: 900px) {
+
+  .selected-camera-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .selected-camera-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+/* =========================================================
+   URBAN LITTER AI
+   MONITORING COMMAND CENTER
+   OVERVIEW
+   ========================================================= */
+
+
+/* =========================================================
+   MAIN COMMAND CENTER
+   ========================================================= */
+
+.command-center {
+  width: 100%;
+  padding: 28px;
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.command-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+
+.command-header h1 {
+  margin: 0;
+  color: #172554;
+  font-size: 29px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+}
+
+
+.command-header p {
+  margin: 5px 0 0;
+  color: #64748b;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+
+.command-live {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  color: #15803d;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+
+.live-dot {
+  width: 9px;
+  height: 9px;
+
+  border-radius: 50%;
+
+  background: #16a34a;
+}
+
+
+/* =========================================================
+   KPI CARDS
+   ========================================================= */
+
+.command-kpi-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 18px;
+
+  margin-bottom: 18px;
+}
+
+
+.command-kpi {
+  min-height: 145px;
+
+  padding: 20px;
+
+  border-radius: 10px;
+
+  display: flex;
+  align-items: flex-start;
+
+  gap: 14px;
+
+  box-sizing: border-box;
+
+  border: 1px solid;
+}
+
+
+.command-kpi > div:last-child {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.command-kpi > div:last-child > span {
+  color: #334155;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+
+.command-kpi strong {
+  margin-top: 5px;
+
+  color: #172554;
+
+  font-size: 30px;
+  line-height: 1.15;
+}
+
+
+.command-kpi small {
+  margin-top: 7px;
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+
+.command-kpi em {
+  color: #94a3b8;
+
+  font-size: 10px;
+
+  font-style: normal;
+}
+
+
+.command-kpi-icon {
+  width: 47px;
+  height: 47px;
+
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 21px;
+
+  flex-shrink: 0;
+}
+
+
+/* =========================================================
+   KPI COLOURS
+   ========================================================= */
+
+.kpi-litter {
+  background: #f8fbff;
+  border-color: #bfdbfe;
+}
+
+
+.kpi-litter .command-kpi-icon {
+  background: #dbeafe;
+}
+
+
+.kpi-high {
+  background: #fff8f8;
+  border-color: #fecaca;
+}
+
+
+.kpi-high .command-kpi-icon {
+  background: #fee2e2;
+}
+
+
+.kpi-cameras {
+  background: #f6fffb;
+  border-color: #bbf7d0;
+}
+
+
+.kpi-cameras .command-kpi-icon {
+  background: #dcfce7;
+}
+
+
+.kpi-ai {
+  background: #fbf9ff;
+  border-color: #ddd6fe;
+}
+
+
+.kpi-ai .command-kpi-icon {
+  background: #ede9fe;
+}
+
+
+.kpi-positive {
+  color: #16a34a;
+}
+
+
+.kpi-negative {
+  color: #dc2626;
+}
+
+
+/* =========================================================
+   TWO COLUMN LAYOUT
+   ========================================================= */
+
+.command-two-column {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(0, 1fr);
+
+  gap: 18px;
+
+  margin-bottom: 18px;
+}
+
+
+/* =========================================================
+   GENERAL PANEL
+   ========================================================= */
+
+.command-panel {
+  background: #ffffff;
+
+  border: 1px solid #dbeafe;
+
+  border-radius: 10px;
+
+  padding: 18px;
+
+  box-sizing: border-box;
+
+  box-shadow:
+    0 2px 8px rgba(15, 23, 42, 0.035);
+}
+
+
+.command-panel-heading {
+  margin-bottom: 15px;
+}
+
+
+.command-panel-heading h2 {
+  margin: 0;
+
+  color: #172554;
+
+  font-size: 17px;
+  font-weight: 800;
+}
+
+
+.command-panel-heading p {
+  margin: 4px 0 0;
+
+  color: #64748b;
+
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   CAMERA LIST
+   ========================================================= */
+
+.command-camera-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 9px;
+}
+
+
+.command-camera {
+  width: 100%;
+
+  min-height: 62px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 9px 12px;
+
+  border-radius: 9px;
+
+  cursor: pointer;
+
+  text-align: left;
+
+  font-family: inherit;
+
+  transition: 0.2s ease;
+}
+
+
+.command-camera:hover {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 4px 12px rgba(15, 23, 42, 0.08);
+}
+
+
+/* =========================================================
+   CAMERA CIRCLE
+   ========================================================= */
+
+.command-camera-circle {
+  width: 43px;
+  height: 43px;
+
+  border-radius: 50%;
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  color: #ffffff;
+
+  font-size: 17px;
+
+  font-weight: 800;
+
+  flex-shrink: 0;
+}
+
+
+/* =========================================================
+   CAMERA INFORMATION
+   ========================================================= */
+
+.command-camera-info {
+  flex: 1;
+
+  display: flex;
+
+  flex-direction: column;
+}
+
+
+.command-camera-info strong {
+  color: #172554;
+
+  font-size: 14px;
+}
+
+
+.command-camera-info span {
+  margin-top: 3px;
+
+  color: #64748b;
+
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   CAMERA PRIORITY
+   ========================================================= */
+
+/* CAMERA A - HIGH - RED */
+
+.command-camera.camera-priority-high {
+  background: #fff1f2;
+
+  border: 1px solid #fecaca;
+
+  border-left: 5px solid #dc2626;
+}
+
+
+.command-camera.camera-priority-high
+.command-camera-circle {
+  background: #ef4444;
+}
+
+
+/* CAMERA B + C - MEDIUM - ORANGE */
+
+.command-camera.camera-priority-medium {
+  background: #fffaf0;
+
+  border: 1px solid #fed7aa;
+
+  border-left: 5px solid #f59e0b;
+}
+
+
+.command-camera.camera-priority-medium
+.command-camera-circle {
+  background: #f59e0b;
+}
+
+
+/* CAMERA D - LOW - GREEN */
+
+.command-camera.camera-priority-low {
+  background: #f0fdf4;
+
+  border: 1px solid #bbf7d0;
+
+  border-left: 5px solid #16a34a;
+}
+
+
+.command-camera.camera-priority-low
+.command-camera-circle {
+  background: #16a34a;
+}
+
+
+/* =========================================================
+   PRIORITY BADGE
+   ========================================================= */
+
+.command-priority {
+  padding: 5px 9px;
+
+  border-radius: 6px;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+
+.camera-priority-high .command-priority {
+  background: #fee2e2;
+
+  color: #991b1b;
+}
+
+
+.camera-priority-medium .command-priority {
+  background: #fef3c7;
+
+  color: #b45309;
+}
+
+
+.camera-priority-low .command-priority {
+  background: #dcfce7;
+
+  color: #166534;
+}
+
+
+/* =========================================================
+   CAMERA STATUS
+   ========================================================= */
+
+.command-camera-online {
+  min-width: 64px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  color: #475569;
+
+  font-size: 11px;
+}
+
+
+.command-camera-online span {
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: #16a34a;
+}
+
+
+/* =========================================================
+   REGION DISTRIBUTION
+   ========================================================= */
+
+.region-chart-layout {
+  min-height: 285px;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(230px, 1fr)
+    minmax(190px, 0.8fr);
+
+  align-items: center;
+}
+
+
+.region-donut {
+  position: relative;
+
+  height: 270px;
+}
+
+
+.region-donut-center {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  transform:
+    translate(-50%, -50%);
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  pointer-events: none;
+}
+
+
+.region-donut-center strong {
+  color: #172554;
+
+  font-size: 24px;
+
+  line-height: 1;
+}
+
+
+.region-donut-center span {
+  margin-top: 5px;
+
+  color: #64748b;
+
+  font-size: 10px;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   REGION LEGEND
+   ========================================================= */
+
+.region-legend {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 17px;
+}
+
+
+.region-legend-row {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 8px;
+}
+
+
+.region-legend-row > div {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  color: #334155;
+
+  font-size: 11px;
+}
+
+
+.region-legend-row strong {
+  color: #172554;
+
+  font-size: 12px;
+}
+
+
+.region-legend-dot {
+  width: 10px;
+  height: 10px;
+
+  border-radius: 50%;
+
+  flex-shrink: 0;
+}
+
+
+/* =========================================================
+   SELECTED CAMERA
+   ========================================================= */
+
+.selected-camera-command {
+  width: 100%;
+
+  margin-top: 20px;
+
+  margin-bottom: 20px;
+
+  padding: 24px;
+
+  box-sizing: border-box;
+
+  border-radius: 11px;
+
+  background: #ffffff;
+
+  border: 2px solid #2563eb;
+
+  box-shadow:
+    0 5px 18px rgba(15, 23, 42, 0.07);
+}
+
+
+/* =========================================================
+   SELECTED CAMERA BORDER BY PRIORITY
+   ========================================================= */
+
+/* CAMERA A */
+
+.selected-camera-a {
+  border-color: #ef4444;
+
+  background: #fffafa;
+}
+
+
+/* CAMERA B */
+
+.selected-camera-b {
+  border-color: #f59e0b;
+
+  background: #fffdf8;
+}
+
+
+/* CAMERA C */
+
+.selected-camera-c {
+  border-color: #f59e0b;
+
+  background: #fffdf8;
+}
+
+
+/* CAMERA D */
+
+.selected-camera-d {
+  border-color: #22c55e;
+
+  background: #f8fff9;
+}
+
+
+/* =========================================================
+   SELECTED CAMERA HEADER
+   ========================================================= */
+
+.selected-camera-header {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  margin-bottom: 22px;
+}
+
+
+.selected-camera-header > div {
+  display: flex;
+
+  flex-direction: column;
+}
+
+
+.selected-camera-header span {
+  color: #64748b;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.7px;
+}
+
+
+.selected-camera-header h2 {
+  margin: 4px 0 0;
+
+  color: #172554;
+
+  font-size: 24px;
+
+  font-weight: 800;
+}
+
+
+.selected-camera-header p {
+  margin: 5px 0 0;
+
+  color: #64748b;
+
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   CLOSE BUTTON
+   ========================================================= */
+
+.close-selected-camera {
+  width: 34px;
+  height: 34px;
+
+  border: none;
+
+  border-radius: 50%;
+
+  background: #f1f5f9;
+
+  color: #64748b;
+
+  cursor: pointer;
+
+  font-size: 22px;
+
+  line-height: 1;
+
+  transition: 0.2s ease;
+}
+
+
+.close-selected-camera:hover {
+  background: #e2e8f0;
+
+  color: #334155;
+}
+
+
+/* =========================================================
+   SELECTED CAMERA DATA GRID
+   ========================================================= */
+
+.selected-camera-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(5, minmax(0, 1fr));
+
+  gap: 14px;
+}
+
+
+/* =========================================================
+   SELECTED CAMERA DATA BOXES
+   ========================================================= */
+
+.selected-camera-card {
+  min-height: 125px;
+
+  padding: 20px;
+
+  box-sizing: border-box;
+
+  border-radius: 10px;
+
+  border: 1px solid #dbeafe;
+
+  background: #f8fbff;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  gap: 9px;
+
+  transition: 0.2s ease;
+}
+
+
+.selected-camera-card:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 5px 12px rgba(15, 23, 42, 0.06);
+}
+
+
+.selected-camera-card span {
+  color: #64748b;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.3px;
+}
+
+
+.selected-camera-card strong {
+  color: #172554;
+
+  font-size: 23px;
+
+  line-height: 1.2;
+}
+
+
+.selected-camera-card small {
+  color: #94a3b8;
+
+  font-size: 10px;
+}
+
+
+/* =========================================================
+   SELECTED CAMERA CARD COLOURS
+   ========================================================= */
+
+/* CAMERA A */
+
+.selected-camera-a
+.selected-camera-card {
+  border-color: #fecaca;
+
+  background: #fff7f7;
+}
+
+
+/* CAMERA B + C */
+
+.selected-camera-b
+.selected-camera-card,
+
+.selected-camera-c
+.selected-camera-card {
+  border-color: #fed7aa;
+
+  background: #fffaf2;
+}
+
+
+/* CAMERA D */
+
+.selected-camera-d
+.selected-camera-card {
+  border-color: #bbf7d0;
+
+  background: #f5fff7;
+}
+
+
+/* =========================================================
+   HIGH PRIORITY NUMBER COLOUR
+   ========================================================= */
+
+.selected-camera-a
+.selected-camera-card:nth-child(4)
+strong {
+  color: #dc2626;
+}
+
+
+.selected-camera-b
+.selected-camera-card:nth-child(4)
+strong,
+
+.selected-camera-c
+.selected-camera-card:nth-child(4)
+strong {
+  color: #d97706;
+}
+
+
+.selected-camera-d
+.selected-camera-card:nth-child(4)
+strong {
+  color: #16a34a;
+}
+
+
+/* =========================================================
+   ONLINE STATUS
+   ========================================================= */
+
+.selected-online {
+  color: #16a34a !important;
+}
+
+
+/* =========================================================
+   PRIORITY ALERT
+   ========================================================= */
+
+.priority-alert {
+  background: #fffafa;
+
+  border-color: #fecaca;
+}
+
+
+.priority-alert
+.command-panel-heading h2 {
+  color: #b91c1c;
+}
+
+
+/* =========================================================
+   ALERT BOX
+   ========================================================= */
+
+.alert-box {
+  padding: 14px;
+
+  border: 1px solid #fecaca;
+
+  border-radius: 9px;
+
+  background: #ffffff;
+}
+
+
+.alert-summary {
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  color: #475569;
+
+  font-size: 12px;
+}
+
+
+.zone-badge {
+  padding: 7px 15px;
+
+  border-radius: 20px;
+
+  background: #ef4444;
+
+  color: #ffffff;
+
+  font-size: 12px;
+
+  font-weight: 800;
+}
+
+
+.alert-summary strong {
+  color: #dc2626;
+
+  font-size: 18px;
+}
+
+
+.alert-box p {
+  margin: 13px 0;
+
+  color: #475569;
+
+  font-size: 12px;
+
+  line-height: 1.55;
+}
+
+
+/* =========================================================
+   COLLECTION QUEUE BUTTON
+   ========================================================= */
+
+.alert-button {
+  border: none;
+
+  border-radius: 7px;
+
+  background: #ef4444;
+
+  color: #ffffff;
+
+  padding: 10px 14px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  cursor: pointer;
+
+  font-family: inherit;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  transition: 0.2s ease;
+}
+
+
+.alert-button:hover {
+  background: #dc2626;
+
+  transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   SYSTEM HEALTH
+   ========================================================= */
+
+.system-health {
+  background: #f8fffc;
+
+  border-color: #bbf7d0;
+}
+
+
+.system-health
+.command-panel-heading h2 {
+  color: #166534;
+}
+
+
+/* =========================================================
+   HEALTH LIST
+   ========================================================= */
+
+.health-list {
+  display: flex;
+
+  flex-direction: column;
+}
+
+
+.health-row {
+  min-height: 48px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  border-top: 1px solid #dbeafe;
+}
+
+
+.health-row > div {
+  display: flex;
+
+  align-items: center;
+
+  gap: 11px;
+
+  color: #334155;
+
+  font-size: 12px;
+
+  font-weight: 700;
+}
+
+
+.health-status-dot {
+  width: 9px;
+  height: 9px;
+
+  border-radius: 50%;
+
+  background: #16a34a;
+
+  box-shadow:
+    0 0 0 5px #dcfce7;
+}
+
+
+.health-row strong {
+  color: #15803d;
+
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1200px) {
+
+  .command-kpi-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+
+  .region-chart-layout {
+    grid-template-columns: 1fr;
+  }
+
+
+  .region-legend {
+    padding-bottom: 12px;
+  }
+
+
+  .selected-camera-grid {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+  }
+
+}
+
+
+@media (max-width: 900px) {
+
+  .command-two-column {
+    grid-template-columns: 1fr;
+  }
+
+
+  .selected-camera-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+
+@media (max-width: 650px) {
+
+  .command-center {
+    padding: 16px;
+  }
+
+
+  .command-header {
+    align-items: flex-start;
+  }
+
+
+  .command-header h1 {
+    font-size: 22px;
+  }
+
+
+  .command-kpi-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  .command-camera {
+    flex-wrap: wrap;
+  }
+
+
+  .command-camera-online {
+    margin-left: 55px;
+  }
+
+
+  .selected-camera-command {
+    padding: 16px;
+  }
+
+
+  .selected-camera-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  .selected-camera-card {
+    min-height: 105px;
+  }
+
+}
+/* =========================================
+   HOTSPOT LOCATIONS - 2 COLUMN LAYOUT
+   ========================================= */
+
+.hotspot-layout {
+  display: block !important;
+  width: 100%;
+}
+
+.hotspot-list-card {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Two cameras / locations per row */
+.hotspot-list {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  width: 100%;
+}
+
+.hotspot-item {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (max-width: 768px) {
+  .hotspot-list {
+    grid-template-columns: 1fr;
+  }
+}
